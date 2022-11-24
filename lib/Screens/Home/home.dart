@@ -292,19 +292,20 @@ class _HomePageState extends State<HomePage> {
                   flexibleSpace: FlexibleSpaceBar(
                     title: RichText(
                       text: TextSpan(
-                        text: AppLocalizations.of(context)!.appTitle,
+                        //text: AppLocalizations.of(context)!.appTitle,
+                        text: "Music Player",
                         style: const TextStyle(
                           fontSize: 30.0,
                           fontWeight: FontWeight.w500,
                         ),
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: appVersion == null ? '' : '\nv$appVersion',
-                            style: const TextStyle(
-                              fontSize: 7.0,
-                            ),
-                          ),
-                        ],
+                        // children: <TextSpan>[
+                        //   TextSpan(
+                        //     text: appVersion == null ? '' : '\nv$appVersion',
+                        //     style: const TextStyle(
+                        //       fontSize: 7.0,
+                        //     ),
+                        //   ),
+                        // ],
                       ),
                       textAlign: TextAlign.end,
                     ),
@@ -449,7 +450,8 @@ class _HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.fromLTRB(5, 30, 5, 20),
                         child: Center(
                           child: Text(
-                            AppLocalizations.of(context)!.madeBy,
+                            //AppLocalizations.of(context)!.madeBy,
+                            "",
                             textAlign: TextAlign.center,
                             style: const TextStyle(fontSize: 12),
                           ),
@@ -524,12 +526,12 @@ class _HomePageState extends State<HomePage> {
                             icon: const Icon(Icons.home_rounded),
                             label: Text(AppLocalizations.of(context)!.home),
                           ),
-                          NavigationRailDestination(
-                            icon: const Icon(Icons.trending_up_rounded),
-                            label: Text(
-                              AppLocalizations.of(context)!.topCharts,
-                            ),
-                          ),
+                          // NavigationRailDestination(
+                          //   icon: const Icon(Icons.trending_up_rounded),
+                          //   label: Text(
+                          //     AppLocalizations.of(context)!.topCharts,
+                          //   ),
+                          // ),
                           NavigationRailDestination(
                             icon: const Icon(MdiIcons.youtube),
                             label: Text(AppLocalizations.of(context)!.youTube),
@@ -835,9 +837,9 @@ class _HomePageState extends State<HomePage> {
                                   ),
                               ],
                             ),
-                            TopCharts(
-                              pageController: _pageController,
-                            ),
+                            // TopCharts(
+                            //   pageController: _pageController,
+                            // ),
                             const YouTube(),
                             const LibraryPage(),
                           ],
@@ -873,14 +875,14 @@ class _HomePageState extends State<HomePage> {
                             selectedColor:
                                 Theme.of(context).colorScheme.secondary,
                           ),
-                          SalomonBottomBarItem(
-                            icon: const Icon(Icons.trending_up_rounded),
-                            title: Text(
-                              AppLocalizations.of(context)!.topCharts,
-                            ),
-                            selectedColor:
-                                Theme.of(context).colorScheme.secondary,
-                          ),
+                          // SalomonBottomBarItem(
+                          //   icon: const Icon(Icons.trending_up_rounded),
+                          //   title: Text(
+                          //     AppLocalizations.of(context)!.topCharts,
+                          //   ),
+                          //   selectedColor:
+                          //       Theme.of(context).colorScheme.secondary,
+                          // ),
                           SalomonBottomBarItem(
                             icon: const Icon(MdiIcons.youtube),
                             title: Text(AppLocalizations.of(context)!.youTube),
