@@ -131,7 +131,7 @@ class _AuthScreenState extends State<AuthScreen> {
                               children: [
                                 RichText(
                                   text: TextSpan(
-                                    text: 'Black\nHole\n',
+                                    text: 'My\nMusic\n',
                                     style: TextStyle(
                                       height: 0.97,
                                       fontSize: 80,
@@ -142,7 +142,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                     ),
                                     children: <TextSpan>[
                                       const TextSpan(
-                                        text: 'Music',
+                                        text: 'Player',
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 80,
@@ -182,7 +182,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                     color: Colors.grey[900],
                                     boxShadow: const [
                                       BoxShadow(
-                                        color: Colors.black26,
+                                        color: Colors.blue,
                                         blurRadius: 5.0,
                                         offset: Offset(0.0, 3.0),
                                       )
@@ -285,11 +285,14 @@ class _AuthScreenState extends State<AuthScreen> {
                                           ),
                                         ],
                                       ),
-                                      Text(
-                                        AppLocalizations.of(context)!
-                                            .disclaimerText,
-                                        style: TextStyle(
-                                          color: Colors.grey.withOpacity(0.7),
+                                      Padding(
+                                        padding: EdgeInsets.only(left:0, bottom: 0, right: 0, top:10), //apply padding to some sides only
+                                        child: Text(
+                                          "We respect your privacy more than anything else. Only some details , which you will login or register here , will be recorded",
+                                          style: TextStyle(
+
+                                            color: Colors.grey.withOpacity(0.7),
+                                          ),
                                         ),
                                       ),
                                     ],
