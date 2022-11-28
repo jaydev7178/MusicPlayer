@@ -17,7 +17,7 @@ Widget emptyScreen(
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          RotatedBox(
+        /*  RotatedBox(
             quarterTurns: turns,
             child: Text(
               text1,
@@ -30,10 +30,10 @@ Widget emptyScreen(
                 fontWeight: FontWeight.w600,
               ),
             ),
-          ),
+          ),*/
           Column(
             children: [
-              Text(
+              /*Text(
                 text2,
                 style: TextStyle(
                   fontSize: size2,
@@ -42,7 +42,7 @@ Widget emptyScreen(
                       : Theme.of(context).colorScheme.secondary,
                   fontWeight: FontWeight.w600,
                 ),
-              ),
+              ),*/
               Text(
                 text3,
                 style: TextStyle(

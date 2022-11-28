@@ -336,16 +336,16 @@ class _PlayScreenState extends State<PlayScreen> {
                     },
                   ),
                   actions: [
-                    IconButton(
+                   /* IconButton(
                       icon: const Icon(Icons.lyrics_rounded),
                       //     Image.asset(
                       //   'assets/lyrics.png',
                       // ),
                       tooltip: AppLocalizations.of(context)!.lyrics,
                       onPressed: () => cardKey.currentState!.toggleCard(),
-                    ),
+                    ),*/
                     if (!offline)
-                      IconButton(
+                     /* IconButton(
                         icon: const Icon(Icons.share_rounded),
                         tooltip: AppLocalizations.of(context)!.share,
                         onPressed: () {
@@ -353,7 +353,7 @@ class _PlayScreenState extends State<PlayScreen> {
                             mediaItem.extras!['perma_url'].toString(),
                           );
                         },
-                      ),
+                      ),*/
                     PopupMenuButton(
                       icon: const Icon(
                         Icons.more_vert_rounded,
@@ -983,14 +983,15 @@ class ControlButtons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       mainAxisSize: MainAxisSize.min,
       children: buttons.map((e) {
-        switch (e) {
-          case 'Like':
+        switch (e)
+        {
+         /* case 'Like':
             return !online
                 ? const SizedBox()
                 : LikeButton(
                     mediaItem: mediaItem,
                     size: 22.0,
-                  );
+                  );*/
           case 'Previous':
             return StreamBuilder<QueueState>(
               stream: audioHandler.queueState,
@@ -1107,14 +1108,14 @@ class ControlButtons extends StatelessWidget {
                 );
               },
             );
-          case 'Download':
+         /* case 'Download':
             return !online
                 ? const SizedBox()
                 : DownloadButton(
                     size: 20.0,
                     icon: 'download',
                     data: MediaItemConverter.mediaItemToMap(mediaItem),
-                  );
+                  );*/
           default:
             break;
         }
@@ -1238,10 +1239,10 @@ class NowPlayingStream extends StatelessWidget {
                           ? Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                LikeButton(
+                                /*LikeButton(
                                   mediaItem: queue[index],
-                                ),
-                                DownloadButton(
+                                ),*/
+                                /*DownloadButton(
                                   icon: 'download',
                                   size: 25.0,
                                   data: {
@@ -1274,7 +1275,7 @@ class NowPlayingStream extends StatelessWidget {
                                     'perma_url':
                                         queue[index].extras?['perma_url'],
                                   },
-                                )
+                                )*/
                               ],
                             )
                           : const SizedBox(),
@@ -2041,8 +2042,8 @@ class NameNControls extends StatelessWidget {
                                   );
                                 },
                               ),
-                              if (!offline)
-                                LikeButton(mediaItem: mediaItem, size: 25.0)
+                             /* if (!offline)
+                                LikeButton(mediaItem: mediaItem, size: 25.0)*/
                             ],
                           ),
                           ControlButtons(
@@ -2097,13 +2098,13 @@ class NameNControls extends StatelessWidget {
                                   );
                                 },
                               ),
-                              if (!offline)
+                              /*if (!offline)
                                 DownloadButton(
                                   size: 25.0,
                                   data: MediaItemConverter.mediaItemToMap(
                                     mediaItem,
                                   ),
-                                )
+                                )*/
                             ],
                           ),
                         ],
@@ -2206,7 +2207,7 @@ class NameNControls extends StatelessWidget {
                   panelController.animatePanelToPosition(0.0);
                 }
               },
-              child: Container(
+              /*child: Container(
                 height: nowplayingBoxHeight,
                 width: width,
                 color: Colors.transparent,
@@ -2242,7 +2243,7 @@ class NameNControls extends StatelessWidget {
                     ),
                   ],
                 ),
-              ),
+              ),*/
             ),
           ),
         ],

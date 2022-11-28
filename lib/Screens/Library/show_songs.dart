@@ -216,9 +216,11 @@ class _SongsListState extends State<SongsList> {
               ),
               body: !processStatus
                   ? const Center(
-                      child: CircularProgressIndicator(),
+                      child:CircularProgressIndicator(
+                          valueColor:AlwaysStoppedAnimation(Colors.blue),
+                      ),
                     )
-                  : ListView.builder(
+                  : ListView.builder (
                       physics: const BouncingScrollPhysics(),
                       padding: const EdgeInsets.only(top: 10, bottom: 10),
                       shrinkWrap: true,

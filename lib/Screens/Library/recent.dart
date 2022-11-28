@@ -128,10 +128,10 @@ class _RecentlyPlayedState extends State<RecentlyPlayed> {
                                       //   data: _songs[index] as Map,
                                       //   icon: 'download',
                                       // ),
-                                      LikeButton(
+                                     /* LikeButton(
                                         mediaItem: null,
                                         data: _songs[index] as Map,
-                                      ),
+                                      ),*/
                                     ],
                                   ),
                                   title: Text(

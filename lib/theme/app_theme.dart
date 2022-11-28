@@ -68,9 +68,9 @@ class AppTheme {
         ),
       ),
       textSelectionTheme: TextSelectionThemeData(
-        selectionHandleColor: currentTheme.currentColor(),
-        cursorColor: currentTheme.currentColor(),
-        selectionColor: currentTheme.currentColor(),
+        selectionHandleColor: Colors.blue,
+        cursorColor: Colors.blue,
+        selectionColor: Colors.blue,
       ),
       inputDecorationTheme: InputDecorationTheme(
         focusedBorder: UnderlineInputBorder(
@@ -109,7 +109,7 @@ class AppTheme {
       indicatorColor: currentTheme.currentColor(),
       colorScheme: Theme.of(context).colorScheme.copyWith(
             primary: Colors.white,
-            secondary: currentTheme.currentColor(),
+            secondary: Colors.blue,
             brightness: Brightness.dark,
           ),
     );

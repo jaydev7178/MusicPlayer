@@ -68,7 +68,7 @@ class _LibraryPageState extends State<LibraryPage> {
             Navigator.pushNamed(context, '/recent');
           },
         ),
-        LibraryTile(
+       /* LibraryTile(
           title: AppLocalizations.of(context)!.favorites,
           icon: Icons.favorite_rounded,
           onTap: () {
@@ -82,7 +82,7 @@ class _LibraryPageState extends State<LibraryPage> {
               ),
             );
           },
-        ),
+        ),*/
         if (!Platform.isIOS)
           LibraryTile(
             title: AppLocalizations.of(context)!.myMusic,
@@ -100,13 +100,13 @@ class _LibraryPageState extends State<LibraryPage> {
               );
             },
           ),
-        LibraryTile(
+       /* LibraryTile(
           title: AppLocalizations.of(context)!.downs,
           icon: Icons.download_done_rounded,
           onTap: () {
             Navigator.pushNamed(context, '/downloads');
           },
-        ),
+        ),*/
         LibraryTile(
           title: AppLocalizations.of(context)!.playlists,
           icon: Icons.playlist_play_rounded,

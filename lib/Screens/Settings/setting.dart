@@ -255,6 +255,7 @@ class _SettingPageState extends State<SettingPage> {
                             switchToCustomTheme();
                           },
                         ),
+
                         ListTile(
                           title: Text(
                             AppLocalizations.of(
@@ -663,6 +664,7 @@ class _SettingPageState extends State<SettingPage> {
                                 },
                                 dense: true,
                               ),
+
                               ListTile(
                                 title: Text(
                                   AppLocalizations.of(
@@ -788,6 +790,7 @@ class _SettingPageState extends State<SettingPage> {
                                 },
                                 dense: true,
                               ),
+
                               ListTile(
                                 title: Text(
                                   AppLocalizations.of(
@@ -835,6 +838,7 @@ class _SettingPageState extends State<SettingPage> {
                                 ),
                                 dense: true,
                               ),
+
                               ListTile(
                                 title: Text(
                                   AppLocalizations.of(
@@ -925,6 +929,7 @@ class _SettingPageState extends State<SettingPage> {
                             );
                           },
                         ),
+
                         ListTile(
                           title: Text(
                             AppLocalizations.of(
@@ -1170,6 +1175,7 @@ class _SettingPageState extends State<SettingPage> {
                           ),
                           dense: true,
                         ),
+
                         Visibility(
                           visible: theme == 'Custom',
                           child: ListTile(

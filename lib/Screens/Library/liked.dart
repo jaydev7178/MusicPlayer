@@ -325,6 +325,7 @@ class _LikedSongsState extends State<LikedSongs>
                   bottom: TabBar(
                     controller: _tcontroller,
                     indicatorSize: TabBarIndicatorSize.label,
+                    indicatorColor: Colors.blue,
                     tabs: [
                       Tab(
                         text: AppLocalizations.of(context)!.songs,

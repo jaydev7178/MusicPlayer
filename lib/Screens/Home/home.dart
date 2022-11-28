@@ -379,7 +379,8 @@ class _HomePageState extends State<HomePage> {
                             );
                           },
                         ),
-                      ListTile(
+
+                    /*  ListTile(
                         title: Text(AppLocalizations.of(context)!.downs),
                         contentPadding:
                             const EdgeInsets.symmetric(horizontal: 20.0),
@@ -392,6 +393,7 @@ class _HomePageState extends State<HomePage> {
                           Navigator.pushNamed(context, '/downloads');
                         },
                       ),
+*/
                       ListTile(
                         title: Text(AppLocalizations.of(context)!.playlists),
                         contentPadding:
@@ -405,6 +407,8 @@ class _HomePageState extends State<HomePage> {
                           Navigator.pushNamed(context, '/playlists');
                         },
                       ),
+
+                      //Setting
                       ListTile(
                         title: Text(AppLocalizations.of(context)!.settings),
                         contentPadding:
@@ -425,6 +429,7 @@ class _HomePageState extends State<HomePage> {
                           );
                         },
                       ),
+
                       ListTile(
                         title: Text(AppLocalizations.of(context)!.about),
                         contentPadding:

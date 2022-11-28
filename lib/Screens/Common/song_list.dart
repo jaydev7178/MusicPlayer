@@ -145,12 +145,12 @@ class _SongsListPageState extends State<SongsListPage> {
                   : BouncyImageSliverScrollView(
                       scrollController: _scrollController,
                       actions: [
-                        MultiDownloadButton(
+                        /*MultiDownloadButton(
                           data: songList,
                           playlistName:
                               widget.listItem['title']?.toString() ?? 'Songs',
-                        ),
-                        IconButton(
+                        ),*/
+                        /*IconButton(
                           icon: const Icon(Icons.share_rounded),
                           tooltip: AppLocalizations.of(context)!.share,
                           onPressed: () {
@@ -158,7 +158,7 @@ class _SongsListPageState extends State<SongsListPage> {
                               widget.listItem['perma_url'].toString(),
                             );
                           },
-                        ),
+                        ),*/
                         PlaylistPopupMenu(
                           data: songList,
                           title:
@@ -401,15 +401,16 @@ class _SongsListPageState extends State<SongsListPage> {
                               trailing: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  DownloadButton(
+                                 /* DownloadButton(
                                     data: entry as Map,
                                     icon: 'download',
                                   ),
                                   LikeButton(
                                     mediaItem: null,
                                     data: entry,
-                                  ),
-                                  SongTileTrailingMenu(data: entry),
+                                  ),*/
+
+                                  SongTileTrailingMenu(data: entry as Map),
                                 ],
                               ),
                               onTap: () {

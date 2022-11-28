@@ -71,8 +71,8 @@ class _SaavnHomePageState extends State<SaavnHomePage>
     switch (type) {
       case 'charts':
         return '';
-      case 'radio_station':
-        return 'Radio • ${item['subtitle']?.toString().unescape()}';
+      /*case 'radio_station':
+        return 'Radio • ${item['subtitle']?.toString().unescape()}';*/
       case 'playlist':
         return 'Playlist • ${item['subtitle']?.toString().unescape() ?? 'JioSaavn'}';
       case 'song':
@@ -119,7 +119,7 @@ class _SaavnHomePageState extends State<SaavnHomePage>
     }
     return (data.isEmpty && recentList.isEmpty)
         ? const Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation(Colors.blue),),
           )
         : ListView.builder(
             physics: const BouncingScrollPhysics(),
@@ -127,13 +127,14 @@ class _SaavnHomePageState extends State<SaavnHomePage>
             padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
             itemCount: data.isEmpty ? 2 : lists.length,
             itemBuilder: (context, idx) {
+
               if (idx == recentIndex) {
                 return (recentList.isEmpty ||
                         !(Hive.box('settings')
                             .get('showRecent', defaultValue: true) as bool))
                     ? const SizedBox()
                     : Column(
-                        children: [
+                      /*  children: [
                           Row(
                             children: [
                               Padding(
@@ -170,7 +171,7 @@ class _SaavnHomePageState extends State<SaavnHomePage>
                               );
                             },
                           ),
-                        ],
+                        ],*/
                       );
               }
               if (idx == playlistIndex) {
@@ -179,187 +180,188 @@ class _SaavnHomePageState extends State<SaavnHomePage>
                             .get('showPlaylist', defaultValue: true) as bool))
                     ? const SizedBox()
                     : Column(
-                        children: [
-                          Row(
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(15, 10, 0, 5),
-                                child: Text(
-                                  AppLocalizations.of(context)!.yourPlaylists,
-                                  style: TextStyle(
-                                    color:
-                                        Theme.of(context).colorScheme.secondary,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: boxSize + 15,
-                            child: ListView.builder(
-                              physics: const BouncingScrollPhysics(),
-                              scrollDirection: Axis.horizontal,
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              itemCount: playlistNames.length,
-                              itemBuilder: (context, index) {
-                                final String name =
-                                    playlistNames[index].toString();
-                                final String showName =
-                                    playlistDetails.containsKey(name)
-                                        ? playlistDetails[name]['name']
-                                                ?.toString() ??
-                                            name
-                                        : name;
-                                final String? subtitle = playlistDetails[
-                                                name] ==
-                                            null ||
-                                        playlistDetails[name]['count'] ==
-                                            null ||
-                                        playlistDetails[name]['count'] == 0
-                                    ? null
-                                    : '${playlistDetails[name]['count']} ${AppLocalizations.of(context)!.songs}';
-                                return GestureDetector(
-                                  child: SizedBox(
-                                    width: boxSize - 30,
-                                    child: HoverBox(
-                                      child: (playlistDetails[name] == null ||
-                                              playlistDetails[name]
-                                                      ['imagesList'] ==
-                                                  null ||
-                                              (playlistDetails[name]
-                                                      ['imagesList'] as List)
-                                                  .isEmpty)
-                                          ? Card(
-                                              elevation: 5,
-                                              color: Colors.black,
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  10.0,
-                                                ),
-                                              ),
-                                              clipBehavior: Clip.antiAlias,
-                                              child: name == 'Favorite Songs'
-                                                  ? const Image(
-                                                      image: AssetImage(
-                                                        'assets/cover.jpg',
-                                                      ),
-                                                    )
-                                                  : const Image(
-                                                      image: AssetImage(
-                                                        'assets/album.png',
-                                                      ),
-                                                    ),
-                                            )
-                                          : Collage(
-                                              borderRadius: 10.0,
-                                              imageList: playlistDetails[name]
-                                                  ['imagesList'] as List,
-                                              showGrid: true,
-                                              placeholderImage:
-                                                  'assets/cover.jpg',
-                                            ),
-                                      builder: (
-                                        BuildContext context,
-                                        bool isHover,
-                                        Widget? child,
-                                      ) {
-                                        return Card(
-                                          color: isHover
-                                              ? null
-                                              : Colors.transparent,
-                                          elevation: 0,
-                                          margin: EdgeInsets.zero,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                              10.0,
-                                            ),
-                                          ),
-                                          clipBehavior: Clip.antiAlias,
-                                          child: Column(
-                                            children: [
-                                              SizedBox.square(
-                                                dimension: isHover
-                                                    ? boxSize - 25
-                                                    : boxSize - 30,
-                                                child: child,
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                  horizontal: 10.0,
-                                                ),
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    Text(
-                                                      showName,
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      softWrap: false,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      style: const TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      ),
-                                                    ),
-                                                    if (subtitle != null)
-                                                      Text(
-                                                        subtitle,
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        softWrap: false,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        style: TextStyle(
-                                                          fontSize: 11,
-                                                          color:
-                                                              Theme.of(context)
-                                                                  .textTheme
-                                                                  .caption!
-                                                                  .color,
-                                                        ),
-                                                      )
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                  onTap: () async {
-                                    await Hive.openBox(name);
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => LikedSongs(
-                                          playlistName: name,
-                                          showName: playlistDetails
-                                                  .containsKey(name)
-                                              ? playlistDetails[name]['name']
-                                                      ?.toString() ??
-                                                  name
-                                              : name,
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                );
-                              },
-                            ),
-                          )
-                        ],
+                        // children: [
+                        //   Row(
+                        //     children: [
+                        //       Padding(
+                        //         padding:
+                        //             const EdgeInsets.fromLTRB(15, 10, 0, 5),
+                        //         child: Text(
+                        //           AppLocalizations.of(context)!.yourPlaylists,
+                        //           style: TextStyle(
+                        //             color:
+                        //                 Theme.of(context).colorScheme.secondary,
+                        //             fontSize: 18,
+                        //             fontWeight: FontWeight.bold,
+                        //           ),
+                        //         ),
+                        //       ),
+                        //     ],
+                        //   ),
+                        //   SizedBox(
+                        //     height: boxSize + 15,
+                        //     child: ListView.builder(
+                        //       physics: const BouncingScrollPhysics(),
+                        //       scrollDirection: Axis.horizontal,
+                        //       padding:
+                        //           const EdgeInsets.symmetric(horizontal: 10),
+                        //       itemCount: playlistNames.length,
+                        //       itemBuilder: (context, index) {
+                        //         final String name =
+                        //             playlistNames[index].toString();
+                        //         final String showName =
+                        //             playlistDetails.containsKey(name)
+                        //                 ? playlistDetails[name]['name']
+                        //                         ?.toString() ??
+                        //                     name
+                        //                 : name;
+                        //         final String? subtitle = playlistDetails[
+                        //                         name] ==
+                        //                     null ||
+                        //                 playlistDetails[name]['count'] ==
+                        //                     null ||
+                        //                 playlistDetails[name]['count'] == 0
+                        //             ? null
+                        //             : '${playlistDetails[name]['count']} ${AppLocalizations.of(context)!.songs}';
+                        //         return GestureDetector(
+                        //           child: SizedBox(
+                        //             width: boxSize - 30,
+                        //             child: HoverBox(
+                        //               child: (playlistDetails[name] == null ||
+                        //                       playlistDetails[name]
+                        //                               ['imagesList'] ==
+                        //                           null ||
+                        //                       (playlistDetails[name]
+                        //                               ['imagesList'] as List)
+                        //                           .isEmpty)
+                        //                   ? Card(
+                        //                       elevation: 5,
+                        //                       color: Colors.black,
+                        //                       shape: RoundedRectangleBorder(
+                        //                         borderRadius:
+                        //                             BorderRadius.circular(
+                        //                           10.0,
+                        //                         ),
+                        //                       ),
+                        //                       clipBehavior: Clip.antiAlias,
+                        //                       child: name == 'Favorite Songs'
+                        //                           ? const Image(
+                        //                               image: AssetImage(
+                        //                                 'assets/cover.jpg',
+                        //                               ),
+                        //                             )
+                        //                           : const Image(
+                        //                               image: AssetImage(
+                        //                                 'assets/album.png',
+                        //                               ),
+                        //                             ),
+                        //                     )
+                        //                   : Collage(
+                        //                       borderRadius: 10.0,
+                        //                       imageList: playlistDetails[name]
+                        //                           ['imagesList'] as List,
+                        //                       showGrid: true,
+                        //                       placeholderImage:
+                        //                           'assets/cover.jpg',
+                        //                     ),
+                        //               builder: (
+                        //                 BuildContext context,
+                        //                 bool isHover,
+                        //                 Widget? child,
+                        //               ) {
+                        //                 return Card(
+                        //                   color: isHover
+                        //                       ? null
+                        //                       : Colors.transparent,
+                        //                   elevation: 0,
+                        //                   margin: EdgeInsets.zero,
+                        //                   shape: RoundedRectangleBorder(
+                        //                     borderRadius: BorderRadius.circular(
+                        //                       10.0,
+                        //                     ),
+                        //                   ),
+                        //                   clipBehavior: Clip.antiAlias,
+                        //                   child: Column(
+                        //                     children: [
+                        //                       SizedBox.square(
+                        //                         dimension: isHover
+                        //                             ? boxSize - 25
+                        //                             : boxSize - 30,
+                        //                         child: child,
+                        //                       ),
+                        //                       Padding(
+                        //                         padding:
+                        //                             const EdgeInsets.symmetric(
+                        //                           horizontal: 10.0,
+                        //                         ),
+                        //                         child: Column(
+                        //                           mainAxisSize:
+                        //                               MainAxisSize.min,
+                        //                           children: [
+                        //                             Text(
+                        //                               showName,
+                        //                               textAlign:
+                        //                                   TextAlign.center,
+                        //                               softWrap: false,
+                        //                               overflow:
+                        //                                   TextOverflow.ellipsis,
+                        //                               style: const TextStyle(
+                        //                                 fontWeight:
+                        //                                     FontWeight.w500,
+                        //                               ),
+                        //                             ),
+                        //                             if (subtitle != null)
+                        //                               Text(
+                        //                                 subtitle,
+                        //                                 textAlign:
+                        //                                     TextAlign.center,
+                        //                                 softWrap: false,
+                        //                                 overflow: TextOverflow
+                        //                                     .ellipsis,
+                        //                                 style: TextStyle(
+                        //                                   fontSize: 11,
+                        //                                   color:
+                        //                                       Theme.of(context)
+                        //                                           .textTheme
+                        //                                           .caption!
+                        //                                           .color,
+                        //                                 ),
+                        //                               )
+                        //                           ],
+                        //                         ),
+                        //                       ),
+                        //                     ],
+                        //                   ),
+                        //                 );
+                        //               },
+                        //             ),
+                        //           ),
+                        //           onTap: () async {
+                        //             await Hive.openBox(name);
+                        //             Navigator.push(
+                        //               context,
+                        //               MaterialPageRoute(
+                        //                 builder: (context) => LikedSongs(
+                        //                   playlistName: name,
+                        //                   showName: playlistDetails
+                        //                           .containsKey(name)
+                        //                       ? playlistDetails[name]['name']
+                        //                               ?.toString() ??
+                        //                           name
+                        //                       : name,
+                        //                 ),
+                        //               ),
+                        //             );
+                        //           },
+                        //         );
+                        //       },
+                        //     ),
+                        //   )
+                        // ],
                       );
               }
-              if (lists[idx] == 'likedArtists') {
+
+             /* if (lists[idx] == 'likedArtists') {
                 final List likedArtistsList = likedArtists.values.toList();
                 return likedArtists.isEmpty
                     ? const SizedBox()
@@ -398,7 +400,8 @@ class _SaavnHomePageState extends State<SaavnHomePage>
                           ),
                         ],
                       );
-              }
+              }*/
+
               return (data[lists[idx]] == null ||
                       blacklistedHomeSections.contains(
                         data['modules'][lists[idx]]?['title']
@@ -423,436 +426,442 @@ class _SaavnHomePageState extends State<SaavnHomePage>
                             ),
                           ),
                         ),
+
                         SizedBox(
                           height: boxSize + 15,
                           child: ListView.builder(
-                            physics: const BouncingScrollPhysics(),
-                            scrollDirection: Axis.horizontal,
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            itemCount: data['modules'][lists[idx]]?['title']
-                                        ?.toString() ==
-                                    'Radio Stations'
-                                ? (data[lists[idx]] as List).length +
-                                    likedRadio.length
-                                : (data[lists[idx]] as List).length,
-                            itemBuilder: (context, index) {
-                              Map item;
-                              if (data['modules'][lists[idx]]?['title']
-                                      ?.toString() ==
-                                  'Radio Stations') {
-                                index < likedRadio.length
-                                    ? item = likedRadio[index] as Map
-                                    : item = data[lists[idx]]
-                                        [index - likedRadio.length] as Map;
-                              } else {
-                                item = data[lists[idx]][index] as Map;
-                              }
-                              final currentSongList = data[lists[idx]]
-                                  .where((e) => e['type'] == 'song')
-                                  .toList();
-                              final subTitle = getSubTitle(item);
-                              if (item.isEmpty) return const SizedBox();
-                              return GestureDetector(
-                                onLongPress: () {
-                                  Feedback.forLongPress(context);
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return InteractiveViewer(
-                                        child: Stack(
-                                          children: [
-                                            GestureDetector(
-                                              onTap: () =>
-                                                  Navigator.pop(context),
+                          physics: const BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          itemCount: data['modules'][lists[idx]]?['title']
+                              ?.toString() ==
+                              'Radio Stations'
+                              ? (data[lists[idx]] as List).length +
+                              likedRadio.length
+                              : (data[lists[idx]] as List).length,
+                          itemBuilder: (context, index) {
+                            Map item;
+                            if (data['modules'][lists[idx]]?['title']
+                                ?.toString() ==
+                                'Radio Stations') {
+                              index < likedRadio.length
+                                  ? item = likedRadio[index] as Map
+                                  : item = data[lists[idx]]
+                              [index - likedRadio.length] as Map;
+                            } else {
+                              item = data[lists[idx]][index] as Map;
+                            }
+                            final currentSongList = data[lists[idx]]
+                                .where((e) => e['type'] == 'song')
+                                .toList();
+                            final subTitle = getSubTitle(item);
+                            if (item.isEmpty) return const SizedBox();
+                            return GestureDetector(
+                              onLongPress: () {
+                                Feedback.forLongPress(context);
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return InteractiveViewer(
+                                      child: Stack(
+                                        children: [
+                                          GestureDetector(
+                                            onTap: () =>
+                                                Navigator.pop(context),
+                                          ),
+                                          AlertDialog(
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                              BorderRadius.circular(15.0),
                                             ),
-                                            AlertDialog(
+                                            backgroundColor:
+                                            Colors.transparent,
+                                            contentPadding: EdgeInsets.zero,
+                                            content: Card(
+                                              elevation: 5,
                                               shape: RoundedRectangleBorder(
                                                 borderRadius:
-                                                    BorderRadius.circular(15.0),
-                                              ),
-                                              backgroundColor:
-                                                  Colors.transparent,
-                                              contentPadding: EdgeInsets.zero,
-                                              content: Card(
-                                                elevation: 5,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                    item['type'] ==
-                                                            'radio_station'
-                                                        ? 1000.0
-                                                        : 15.0,
-                                                  ),
+                                                BorderRadius.circular(
+                                                  item['type'] ==
+                                                      'radio_station'
+                                                      ? 1000.0
+                                                      : 15.0,
                                                 ),
-                                                clipBehavior: Clip.antiAlias,
-                                                child: CachedNetworkImage(
+                                              ),
+                                              clipBehavior: Clip.antiAlias,
+                                              child: CachedNetworkImage(
+                                                fit: BoxFit.cover,
+                                                errorWidget:
+                                                    (context, _, __) =>
+                                                const Image(
                                                   fit: BoxFit.cover,
-                                                  errorWidget:
-                                                      (context, _, __) =>
-                                                          const Image(
-                                                    fit: BoxFit.cover,
-                                                    image: AssetImage(
-                                                      'assets/cover.jpg',
-                                                    ),
-                                                  ),
-                                                  imageUrl: item['image']
-                                                      .toString()
-                                                      .replaceAll(
-                                                        'http:',
-                                                        'https:',
-                                                      )
-                                                      .replaceAll(
-                                                        '50x50',
-                                                        '500x500',
-                                                      )
-                                                      .replaceAll(
-                                                        '150x150',
-                                                        '500x500',
-                                                      ),
-                                                  placeholder: (context, url) =>
-                                                      Image(
-                                                    fit: BoxFit.cover,
-                                                    image: (item['type'] ==
-                                                                'playlist' ||
-                                                            item['type'] ==
-                                                                'album')
-                                                        ? const AssetImage(
-                                                            'assets/album.png',
-                                                          )
-                                                        : item['type'] ==
-                                                                'artist'
-                                                            ? const AssetImage(
-                                                                'assets/artist.png',
-                                                              )
-                                                            : const AssetImage(
-                                                                'assets/cover.jpg',
-                                                              ),
+                                                  image: AssetImage(
+                                                    'assets/cover.jpg',
                                                   ),
                                                 ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                                onTap: () {
-                                  if (item['type'] == 'radio_station') {
-                                    ShowSnackBar().showSnackBar(
-                                      context,
-                                      AppLocalizations.of(context)!
-                                          .connectingRadio,
-                                      duration: const Duration(seconds: 2),
-                                    );
-                                    SaavnAPI()
-                                        .createRadio(
-                                      names: item['more_info']
-                                                      ['featured_station_type']
-                                                  .toString() ==
-                                              'artist'
-                                          ? [
-                                              item['more_info']['query']
-                                                  .toString()
-                                            ]
-                                          : [item['id'].toString()],
-                                      language: item['more_info']['language']
-                                              ?.toString() ??
-                                          'hindi',
-                                      stationType: item['more_info']
-                                              ['featured_station_type']
-                                          .toString(),
-                                    )
-                                        .then((value) {
-                                      if (value != null) {
-                                        SaavnAPI()
-                                            .getRadioSongs(stationId: value)
-                                            .then((value) {
-                                          value.shuffle();
-                                          Navigator.push(
-                                            context,
-                                            PageRouteBuilder(
-                                              opaque: false,
-                                              pageBuilder: (_, __, ___) =>
-                                                  PlayScreen(
-                                                songsList: value,
-                                                index: 0,
-                                                offline: false,
-                                                fromDownloads: false,
-                                                fromMiniplayer: false,
-                                                recommend: true,
-                                              ),
-                                            ),
-                                          );
-                                        });
-                                      }
-                                    });
-                                  } else {
-                                    Navigator.push(
-                                      context,
-                                      PageRouteBuilder(
-                                        opaque: false,
-                                        pageBuilder: (_, __, ___) =>
-                                            item['type'] == 'song'
-                                                ? PlayScreen(
-                                                    songsList:
-                                                        currentSongList as List,
-                                                    index: currentSongList
-                                                        .indexWhere(
-                                                      (e) =>
-                                                          e['id'] == item['id'],
-                                                    ),
-                                                    offline: false,
-                                                    fromDownloads: false,
-                                                    fromMiniplayer: false,
-                                                    recommend: true,
-                                                  )
-                                                : SongsListPage(
-                                                    listItem: item,
-                                                  ),
-                                      ),
-                                    );
-                                  }
-                                },
-                                child: SizedBox(
-                                  width: boxSize - 30,
-                                  child: HoverBox(
-                                    child: Card(
-                                      elevation: 5,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(
-                                          item['type'] == 'radio_station'
-                                              ? 1000.0
-                                              : 10.0,
-                                        ),
-                                      ),
-                                      clipBehavior: Clip.antiAlias,
-                                      child: CachedNetworkImage(
-                                        fit: BoxFit.cover,
-                                        errorWidget: (context, _, __) =>
-                                            const Image(
-                                          fit: BoxFit.cover,
-                                          image: AssetImage(
-                                            'assets/cover.jpg',
-                                          ),
-                                        ),
-                                        imageUrl: item['image']
-                                            .toString()
-                                            .replaceAll(
-                                              'http:',
-                                              'https:',
-                                            )
-                                            .replaceAll(
-                                              '50x50',
-                                              '500x500',
-                                            )
-                                            .replaceAll(
-                                              '150x150',
-                                              '500x500',
-                                            ),
-                                        placeholder: (context, url) => Image(
-                                          fit: BoxFit.cover,
-                                          image: (item['type'] == 'playlist' ||
-                                                  item['type'] == 'album')
-                                              ? const AssetImage(
-                                                  'assets/album.png',
+                                                imageUrl: item['image']
+                                                    .toString()
+                                                    .replaceAll(
+                                                  'http:',
+                                                  'https:',
                                                 )
-                                              : item['type'] == 'artist'
-                                                  ? const AssetImage(
-                                                      'assets/artist.png',
-                                                    )
-                                                  : const AssetImage(
-                                                      'assets/cover.jpg',
+                                                    .replaceAll(
+                                                  '50x50',
+                                                  '500x500',
+                                                )
+                                                    .replaceAll(
+                                                  '150x150',
+                                                  '500x500',
+                                                ),
+                                                placeholder: (context, url) =>
+                                                    Image(
+                                                      fit: BoxFit.cover,
+                                                      image: (item['type'] ==
+                                                          'playlist' ||
+                                                          item['type'] ==
+                                                              'album')
+                                                          ? const AssetImage(
+                                                        'assets/album.png',
+                                                      )
+                                                          : item['type'] ==
+                                                          'artist'
+                                                          ? const AssetImage(
+                                                        'assets/artist.png',
+                                                      )
+                                                          : const AssetImage(
+                                                        'assets/cover.jpg',
+                                                      ),
                                                     ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                              onTap: () {
+                                if (item['type'] == 'radio_station') {
+                                  ShowSnackBar().showSnackBar(
+                                    context,
+                                    AppLocalizations.of(context)!
+                                        .connectingRadio,
+                                    duration: const Duration(seconds: 2),
+                                  );
+                                  SaavnAPI()
+                                      .createRadio(
+                                    names: item['more_info']
+                                    ['featured_station_type']
+                                        .toString() ==
+                                        'artist'
+                                        ? [
+                                      item['more_info']['query']
+                                          .toString()
+                                    ]
+                                        : [item['id'].toString()],
+                                    language: item['more_info']['language']
+                                        ?.toString() ??
+                                        'hindi',
+                                    stationType: item['more_info']
+                                    ['featured_station_type']
+                                        .toString(),
+                                  )
+                                      .then((value) {
+                                    if (value != null) {
+                                      SaavnAPI()
+                                          .getRadioSongs(stationId: value)
+                                          .then((value) {
+                                        value.shuffle();
+                                        Navigator.push(
+                                          context,
+                                          PageRouteBuilder(
+                                            opaque: false,
+                                            pageBuilder: (_, __, ___) =>
+                                                PlayScreen(
+                                                  songsList: value,
+                                                  index: 0,
+                                                  offline: false,
+                                                  fromDownloads: false,
+                                                  fromMiniplayer: false,
+                                                  recommend: true,
+                                                ),
+                                          ),
+                                        );
+                                      });
+                                    }
+                                  });
+                                } else {
+                                  Navigator.push(
+                                    context,
+                                    PageRouteBuilder(
+                                      opaque: false,
+                                      pageBuilder: (_, __, ___) =>
+                                      item['type'] == 'song'
+                                          ? PlayScreen(
+                                        songsList:
+                                        currentSongList as List,
+                                        index: currentSongList
+                                            .indexWhere(
+                                              (e) =>
+                                          e['id'] == item['id'],
+                                        ),
+                                        offline: false,
+                                        fromDownloads: false,
+                                        fromMiniplayer: false,
+                                        recommend: true,
+                                      )
+                                          : SongsListPage(
+                                        listItem: item,
+                                      ),
+                                    ),
+                                  );
+                                }
+                              },
+                              child: SizedBox(
+                                width: boxSize - 30,
+                                child: HoverBox(
+                                  child: Card(
+                                    elevation: 5,
+                                   /* shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                        item['type'] == 'radio_station'
+                                            ? 1000.0
+                                            : 10.0,
+                                      ),
+                                    ),*/
+                                    clipBehavior: Clip.antiAlias,
+                                    child: CachedNetworkImage(
+                                      fit: BoxFit.cover,
+                                      errorWidget: (context, _, __) =>
+                                      const Image(
+                                        fit: BoxFit.cover,
+                                        image: AssetImage(
+                                          'assets/cover.jpg',
+                                        ),
+                                      ),
+                                      imageUrl: item['image']
+                                          .toString()
+                                          .replaceAll(
+                                        'http:',
+                                        'https:',
+                                      )
+                                          .replaceAll(
+                                        '50x50',
+                                        '500x500',
+                                      )
+                                          .replaceAll(
+                                        '150x150',
+                                        '500x500',
+                                      ),
+                                      placeholder: (context, url) => Image(
+                                        fit: BoxFit.cover,
+                                        image: (item['type'] == 'playlist' ||
+                                            item['type'] == 'album')
+                                            ? const AssetImage(
+                                          'assets/album.png',
+                                        )
+                                            : item['type'] == 'artist'
+                                            ? const AssetImage(
+                                          'assets/artist.png',
+                                        )
+                                            : const AssetImage(
+                                          'assets/cover.jpg',
                                         ),
                                       ),
                                     ),
-                                    builder: (
+                                  ),
+                                  builder: (
                                       BuildContext context,
                                       bool isHover,
                                       Widget? child,
-                                    ) {
-                                      return Card(
-                                        color:
-                                            isHover ? null : Colors.transparent,
-                                        elevation: 0,
-                                        margin: EdgeInsets.zero,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(
-                                            10.0,
-                                          ),
+                                      ) {
+                                    return Card(
+                                      color:
+                                      isHover ? null : Colors.transparent,
+                                      elevation: 0,
+                                      margin: EdgeInsets.zero,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                          10.0,
                                         ),
-                                        clipBehavior: Clip.antiAlias,
-                                        child: Column(
-                                          children: [
-                                            Stack(
-                                              children: [
-                                                SizedBox.square(
-                                                  dimension: isHover
-                                                      ? boxSize - 25
-                                                      : boxSize - 30,
-                                                  child: child,
-                                                ),
-                                                if (isHover &&
-                                                    (item['type'] == 'song' ||
+                                      ),
+                                      clipBehavior: Clip.antiAlias,
+                                      child: Column(
+                                        children: [
+                                          Stack(
+                                            children: [
+                                              SizedBox.square(
+                                                dimension: isHover
+                                                    ? boxSize - 25
+                                                    : boxSize - 30,
+                                                child: child,
+                                              ),
+                                              if (isHover &&
+                                                  (item['type'] == 'song' ||
+                                                      item['type'] ==
+                                                          'radio_station'))
+
+                                               /* Positioned.fill(
+                                                  child: Container(
+                                                    margin:
+                                                    const EdgeInsets.all(
+                                                      4.0,
+                                                    ),
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.black54,
+                                                      borderRadius:
+                                                      BorderRadius
+                                                          .circular(
                                                         item['type'] ==
-                                                            'radio_station'))
-                                                  Positioned.fill(
-                                                    child: Container(
-                                                      margin:
-                                                          const EdgeInsets.all(
-                                                        4.0,
+                                                            'radio_station'
+                                                            ? 1000.0
+                                                            : 10.0,
                                                       ),
-                                                      decoration: BoxDecoration(
-                                                        color: Colors.black54,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                          item['type'] ==
-                                                                  'radio_station'
-                                                              ? 1000.0
-                                                              : 10.0,
+                                                    ),
+                                                    child: Center(
+                                                      child: DecoratedBox(
+                                                        decoration:
+                                                        BoxDecoration(
+                                                          color:
+                                                          Colors.black87,
+                                                          borderRadius:
+                                                          BorderRadius
+                                                              .circular(
+                                                            1000.0,
+                                                          ),
                                                         ),
-                                                      ),
-                                                      child: Center(
-                                                        child: DecoratedBox(
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color:
-                                                                Colors.black87,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                              1000.0,
-                                                            ),
-                                                          ),
-                                                          child: const Icon(
-                                                            Icons
-                                                                .play_arrow_rounded,
-                                                            size: 50.0,
-                                                            color: Colors.white,
-                                                          ),
+                                                        child: const Icon(
+                                                          Icons
+                                                              .play_arrow_rounded,
+                                                          size: 50.0,
+                                                          color: Colors.white,
                                                         ),
                                                       ),
                                                     ),
                                                   ),
-                                                if (item['type'] ==
-                                                        'radio_station' &&
-                                                    (Platform.isAndroid ||
-                                                        Platform.isIOS ||
-                                                        isHover))
-                                                  Align(
-                                                    alignment:
-                                                        Alignment.topRight,
-                                                    child: IconButton(
-                                                      icon: likedRadio
-                                                              .contains(item)
-                                                          ? const Icon(
-                                                              Icons
-                                                                  .favorite_rounded,
-                                                              color: Colors.red,
-                                                            )
-                                                          : const Icon(
-                                                              Icons
-                                                                  .favorite_border_rounded,
-                                                            ),
-                                                      tooltip: likedRadio
-                                                              .contains(item)
-                                                          ? AppLocalizations.of(
-                                                              context,
-                                                            )!
-                                                              .unlike
-                                                          : AppLocalizations.of(
-                                                              context,
-                                                            )!
-                                                              .like,
-                                                      onPressed: () {
-                                                        likedRadio
-                                                                .contains(item)
-                                                            ? likedRadio
-                                                                .remove(item)
-                                                            : likedRadio
-                                                                .add(item);
-                                                        Hive.box('settings')
-                                                            .put(
-                                                          'likedRadio',
-                                                          likedRadio,
-                                                        );
-                                                        setState(() {});
-                                                      },
+                                                ),*/
+
+                                             /* if (item['type'] ==
+                                                  'radio_station' &&
+                                                  (Platform.isAndroid ||
+                                                      Platform.isIOS ||
+                                                      isHover))*/
+
+                                              /*  Align(
+                                                  alignment:
+                                                  Alignment.topRight,
+                                                  child: IconButton(
+                                                    icon: likedRadio
+                                                        .contains(item)
+                                                        ? const Icon(
+                                                      Icons
+                                                          .favorite_rounded,
+                                                      color: Colors.red,
+                                                    )
+                                                        : const Icon(
+                                                      Icons
+                                                          .favorite_border_rounded,
                                                     ),
+                                                    tooltip: likedRadio
+                                                        .contains(item)
+                                                        ? AppLocalizations.of(
+                                                      context,
+                                                    )!
+                                                        .unlike
+                                                        : AppLocalizations.of(
+                                                      context,
+                                                    )!
+                                                        .like,
+                                                    onPressed: () {
+                                                      likedRadio
+                                                          .contains(item)
+                                                          ? likedRadio
+                                                          .remove(item)
+                                                          : likedRadio
+                                                          .add(item);
+                                                      Hive.box('settings')
+                                                          .put(
+                                                        'likedRadio',
+                                                        likedRadio,
+                                                      );
+                                                      setState(() {});
+                                                    },
                                                   ),
-                                                if (item['type'] == 'song' ||
-                                                    item['duration'] != null)
-                                                  Align(
-                                                    alignment:
-                                                        Alignment.topRight,
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      children: [
-                                                        if (isHover)
-                                                          LikeButton(
-                                                            mediaItem: null,
-                                                            data: item,
-                                                          ),
-                                                        SongTileTrailingMenu(
+                                                ),*/
+
+                                              if (item['type'] == 'song' ||
+                                                  item['duration'] != null)
+                                                Align(
+                                                  alignment:
+                                                  Alignment.topRight,
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                    MainAxisSize.min,
+                                                    children: [
+                                                      if (isHover)
+                                                        LikeButton(
+                                                          mediaItem: null,
                                                           data: item,
                                                         ),
-                                                      ],
-                                                    ),
+                                                      SongTileTrailingMenu(
+                                                        data: item,
+                                                      ),
+                                                    ],
                                                   ),
-                                              ],
+                                                ),
+                                            ],
+                                          ),
+                                          Padding(
+                                            padding:
+                                            const EdgeInsets.symmetric(
+                                              horizontal: 10.0,
                                             ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                horizontal: 10.0,
-                                              ),
-                                              child: Column(
-                                                children: [
+                                            child: Column(
+
+                                              children: [
+                                                Text(
+                                                  item['title']
+                                                      ?.toString()
+                                                      .unescape() ??
+                                                      '',
+                                                  textAlign: TextAlign.center,
+                                                  softWrap: false,
+                                                  overflow:
+                                                  TextOverflow.ellipsis,
+                                                  style: const TextStyle(
+                                                    fontWeight:
+                                                    FontWeight.w500,
+                                                  ),
+                                                ),
+                                                if (subTitle != '')
                                                   Text(
-                                                    item['title']
-                                                            ?.toString()
-                                                            .unescape() ??
-                                                        '',
-                                                    textAlign: TextAlign.center,
+                                                    subTitle,
+                                                    textAlign:
+                                                    TextAlign.center,
                                                     softWrap: false,
                                                     overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style: const TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500,
+                                                    TextOverflow.ellipsis,
+                                                    style: TextStyle(
+                                                      fontSize: 11,
+                                                      color: Theme.of(context)
+                                                          .textTheme
+                                                          .caption!
+                                                          .color,
                                                     ),
-                                                  ),
-                                                  if (subTitle != '')
-                                                    Text(
-                                                      subTitle,
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      softWrap: false,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      style: TextStyle(
-                                                        fontSize: 11,
-                                                        color: Theme.of(context)
-                                                            .textTheme
-                                                            .caption!
-                                                            .color,
-                                                      ),
-                                                    )
-                                                ],
-                                              ),
+                                                  )
+                                              ],
                                             ),
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                  ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
                                 ),
-                              );
-                            },
-                          ),
+                              ),
+                            );
+                          },
+                        ),
                         ),
                       ],
                     );

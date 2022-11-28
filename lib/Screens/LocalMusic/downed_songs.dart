@@ -213,6 +213,7 @@ class _DownloadedSongsState extends State<DownloadedSongs>
                     isScrollable: widget.showPlaylists,
                     controller: _tcontroller,
                     indicatorSize: TabBarIndicatorSize.label,
+                    indicatorColor: Colors.blue,
                     tabs: [
                       Tab(
                         text: AppLocalizations.of(context)!.songs,
@@ -352,7 +353,7 @@ class _DownloadedSongsState extends State<DownloadedSongs>
                 ),
                 body: !added
                     ? const Center(
-                        child: CircularProgressIndicator(),
+                        child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation(Colors.blue)),
                       )
                     : TabBarView(
                         physics: const CustomPhysics(),
