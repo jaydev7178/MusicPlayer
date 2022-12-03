@@ -73,5 +73,5 @@ msix_config:
   publisher_display_name: Ankit Sangwan
   identity_name: com.shadow.blackhole
   icons_background_color: transparent
-  logo_path: assets/ic_launcher.png
+  logo_path: assets/logo.png
   file_extension: .mp3, .m4a

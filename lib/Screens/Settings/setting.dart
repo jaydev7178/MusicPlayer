@@ -190,7 +190,7 @@ class _SettingPageState extends State<SettingPage> {
           SliverList(
             delegate: SliverChildListDelegate(
               [
-                Padding(
+                /*Padding(
                   padding: const EdgeInsets.fromLTRB(
                     10.0,
                     10.0,
@@ -1684,7 +1684,7 @@ class _SettingPageState extends State<SettingPage> {
                     10.0,
                     10.0,
                   ),
-                  child: GradientCard(
+                 child: GradientCard(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -3421,7 +3421,7 @@ class _SettingPageState extends State<SettingPage> {
                       ],
                     ),
                   ),
-                ),
+                ),*/
                 Padding(
                   padding: const EdgeInsets.fromLTRB(
                     10.0,
@@ -3571,7 +3571,7 @@ class _SettingPageState extends State<SettingPage> {
                             Share.share(
                               '${AppLocalizations.of(
                                 context,
-                              )!.shareAppText}: https://github.com/Sangwan5688/BlackHole',
+                              )!.shareAppText}: https://github.com/jaydev7178/MusicPlayer',
                             );
                           },
                           dense: true,
@@ -3599,7 +3599,7 @@ class _SettingPageState extends State<SettingPage> {
                             );
                           },
                         ),
-                        ListTile(
+                        /*ListTile(
                           title: Text(
                             AppLocalizations.of(
                               context,
@@ -3659,7 +3659,7 @@ class _SettingPageState extends State<SettingPage> {
                               ),
                             ),
                           ),
-                        ),
+                        ),*/
                         ListTile(
                           title: Text(
                             AppLocalizations.of(
@@ -3786,7 +3786,7 @@ class _SettingPageState extends State<SettingPage> {
                             );
                           },
                         ),
-                        ListTile(
+                       /* ListTile(
                           title: Text(
                             AppLocalizations.of(
                               context,
@@ -3880,7 +3880,7 @@ class _SettingPageState extends State<SettingPage> {
                             );
                           },
                           dense: true,
-                        ),
+                        ),*/
                         ListTile(
                           title: Text(
                             AppLocalizations.of(
@@ -3894,23 +3894,6 @@ class _SettingPageState extends State<SettingPage> {
                           },
                         ),
                       ],
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(
-                    5,
-                    30,
-                    5,
-                    20,
-                  ),
-                  child: Center(
-                    child: Text(
-                      AppLocalizations.of(
-                        context,
-                      )!
-                          .madeBy,
-                      style: const TextStyle(fontSize: 12),
                     ),
                   ),
                 ),

@@ -102,22 +102,11 @@ class _PrefScreenState extends State<PrefScreen> {
                                       ),
                                       children: <TextSpan>[
                                         TextSpan(
-                                          text: AppLocalizations.of(context)!
-                                              .aboard,
+                                          text: "Music Player\n",
                                           style: const TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 75,
+                                            fontSize: 50,
                                             color: Colors.white,
-                                          ),
-                                        ),
-                                        TextSpan(
-                                          text: '!\n',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 70,
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .secondary,
                                           ),
                                         ),
                                         TextSpan(
@@ -451,7 +440,7 @@ class _PrefScreenState extends State<PrefScreen> {
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10.0),
                                       // color: Theme.of(context).accentColor,
-                                      color: Colors.tealAccent[400],
+                                      color: Colors.blue,
                                       boxShadow: const [
                                         BoxShadow(
                                           color: Colors.black26,
@@ -464,7 +453,7 @@ class _PrefScreenState extends State<PrefScreen> {
                                       child: Text(
                                         AppLocalizations.of(context)!.finish,
                                         style: const TextStyle(
-                                          color: Colors.black,
+                                          color: Colors.white,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 20.0,
                                         ),

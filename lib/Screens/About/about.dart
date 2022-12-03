@@ -74,24 +74,24 @@ class _AboutScreenState extends State<AboutScreen> {
                     Card(
                       elevation: 15,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(100.0),
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
                       clipBehavior: Clip.antiAlias,
                       child: const SizedBox(
                         width: 150,
                         child:
-                            Image(image: AssetImage('assets/ic_launcher.png')),
+                            Image(image: AssetImage('assets/icon.png')),
                       ),
                     ),
                     const SizedBox(height: 20),
                     Text(
-                      AppLocalizations.of(context)!.appTitle,
+                      "Music Player",
                       style: const TextStyle(
                         fontSize: 35,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text('v$appVersion'),
+                    Text('v1.1.1'),
                   ],
                 ),
                 Padding(
@@ -99,7 +99,7 @@ class _AboutScreenState extends State<AboutScreen> {
                   child: Column(
                     children: [
                       Text(
-                        AppLocalizations.of(context)!.aboutLine1,
+                        "This is open-source application and you can use easliy",
                         textAlign: TextAlign.center,
                         style: const TextStyle(fontSize: 16),
                       ),
@@ -107,7 +107,7 @@ class _AboutScreenState extends State<AboutScreen> {
                         onPressed: () {
                           launchUrl(
                             Uri.parse(
-                              'https://github.com/Sangwan5688/BlackHole',
+                              'https://github.com/jaydev7178/MusicPlayer',
                             ),
                             mode: LaunchMode.externalApplication,
                           );
@@ -125,14 +125,14 @@ class _AboutScreenState extends State<AboutScreen> {
                         ),
                       ),
                       Text(
-                        AppLocalizations.of(context)!.aboutLine2,
+                        "If you liked my work check more project in my Github",
                         textAlign: TextAlign.center,
                         style: const TextStyle(fontSize: 16),
                       ),
                     ],
                   ),
                 ),
-                Column(
+               /* Column(
                   children: [
                     TextButton(
                       style: TextButton.styleFrom(
@@ -200,7 +200,7 @@ class _AboutScreenState extends State<AboutScreen> {
                       style: const TextStyle(fontSize: 12),
                     ),
                   ],
-                ),
+                ),*/
                 Padding(
                   padding: const EdgeInsets.fromLTRB(5, 30, 5, 20),
                   child: Center(

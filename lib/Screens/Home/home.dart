@@ -379,29 +379,6 @@ class _HomePageState extends State<HomePage> {
                             );
                           },
                         ),
-
-<<<<<<< HEAD
-                    /*  ListTile(
-=======
-                      ListTile(
->>>>>>> 6acd1b17a324198b3892b8738cf36245d8e5ba9e
-                        title: Text(AppLocalizations.of(context)!.downs),
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 20.0),
-                        leading: Icon(
-                          Icons.download_done_rounded,
-                          color: Theme.of(context).iconTheme.color,
-                        ),
-                        onTap: () {
-                          Navigator.pop(context);
-                          Navigator.pushNamed(context, '/downloads');
-                        },
-                      ),
-<<<<<<< HEAD
-*/
-=======
-
->>>>>>> 6acd1b17a324198b3892b8738cf36245d8e5ba9e
                       ListTile(
                         title: Text(AppLocalizations.of(context)!.playlists),
                         contentPadding:
